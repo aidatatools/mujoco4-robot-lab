@@ -1,0 +1,227 @@
+<mujoco model="mini_pupper_2">
+  <compiler angle="radian" meshdir="meshes"/>
+
+  <option integrator="implicitfast"/>
+
+  <size nkey="1"/>
+
+  <asset>
+    <texture type="2d" colorspace="auto" name="grid" builtin="checker" rgb1="0.25 0.3 0.35" rgb2="0.35 0.4 0.45" width="300" height="300"/>
+    <texture type="skybox" colorspace="auto" name="sky" builtin="gradient" rgb1="0.6 0.8 1" rgb2="1 1 1" width="512" height="3072"/>
+    <material name="grid" texture="grid" texrepeat="20 20"/>
+    <mesh name="base_link" content_type="model/stl" file="base_link.stl"/>
+    <mesh name="lf1" content_type="model/stl" file="lf1.stl"/>
+    <mesh name="lf2" content_type="model/stl" file="lf2.stl"/>
+    <mesh name="lf3" content_type="model/stl" file="lf3.stl"/>
+    <mesh name="rf1" content_type="model/stl" file="rf1.stl"/>
+    <mesh name="rf2" content_type="model/stl" file="rf2.stl"/>
+    <mesh name="rf3" content_type="model/stl" file="rf3.stl"/>
+    <mesh name="rb1" content_type="model/stl" file="rb1.stl"/>
+    <mesh name="rb2" content_type="model/stl" file="rb2.stl"/>
+    <mesh name="rb3" content_type="model/stl" file="rb3.stl"/>
+    <mesh name="lb1" content_type="model/stl" file="lb1.stl"/>
+    <mesh name="lb2" content_type="model/stl" file="lb2.stl"/>
+    <mesh name="lb3" content_type="model/stl" file="lb3.stl"/>
+    <mesh name="Body_front" content_type="model/stl" file="Body_front.stl"/>
+    <mesh name="Board_PCB" content_type="model/stl" file="Board_PCB.stl"/>
+    <mesh name="Board_connectors_1" content_type="model/stl" file="Board_connectors_1.stl"/>
+    <mesh name="Board_connectors_2" content_type="model/stl" file="Board_connectors_2.stl"/>
+    <mesh name="lidar" content_type="model/stl" file="lidar.stl"/>
+    <mesh name="rffoot" content_type="model/stl" file="rffoot.stl"/>
+    <mesh name="rbfoot" content_type="model/stl" file="rbfoot.stl"/>
+    <mesh name="lbfoot" content_type="model/stl" file="lbfoot.stl"/>
+    <mesh name="lffoot" content_type="model/stl" file="lffoot.stl"/>
+    <mesh name="lpf1" content_type="model/stl" file="lpf1.stl"/>
+    <mesh name="lpb1" content_type="model/stl" file="lpb1.stl"/>
+    <mesh name="rpf1" content_type="model/stl" file="rpf1.stl"/>
+    <mesh name="rpb1" content_type="model/stl" file="rpb1.stl"/>
+    <mesh name="lpf2" content_type="model/stl" file="lpf2.stl"/>
+    <mesh name="lpb2" content_type="model/stl" file="lpb2.stl"/>
+    <mesh name="rpf2" content_type="model/stl" file="rpf2.stl"/>
+    <mesh name="rpb2" content_type="model/stl" file="rpb2.stl"/>
+    <mesh name="Shell_Side" content_type="model/stl" file="Shell_Side.stl"/>
+  </asset>
+
+  <worldbody>
+    <geom name="floor" size="5 5 0.05" type="plane" material="grid"/>
+    <camera name="side" quat="0.828067 0.560629 0 0" pos="0 -0.6 0.25"/>
+    <light castshadow="false" pos="0 0 2" type="directional"/>
+    <light pos="0 0 1" cutoff="60" mode="trackcom"/>
+    <body name="base_link" pos="0 0 0.12">
+      <inertial pos="-0.0223999 0.000237641 0.00778737" quat="0.0142976 0.722184 0.0150008 0.69139" mass="0.513869" diaginertia="0.00945227 0.00942288 0.00211026"/>
+      <joint name="floating_base" type="free"/>
+      <geom quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" rgba="0.0980392 0.0980392 0.0980392 1" density="0" mesh="base_link"/>
+      <geom quat="1 0 0 0" type="mesh" rgba="0.0980392 0.0980392 0.0980392 1" mesh="base_link"/>
+      <body name="lf1" pos="0.05 0.0235 0">
+        <inertial pos="0.0193272 0.0064158 0.00691373" quat="0.383341 0.596267 -0.452637 0.540957" mass="0.023343" diaginertia="6.76557e-06 6.25281e-06 4.06094e-06"/>
+        <joint name="base_lf1" range="-3.14 3.14" actuatorfrcrange="-10 10" armature="0.0005" damping="0.01" frictionloss="0.005" axis="1 0 0"/>
+        <geom quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" rgba="0.258824 0.258824 0.258824 1" density="0" mesh="lf1"/>
+        <geom quat="1 0 0 0" type="mesh" rgba="0.258824 0.258824 0.258824 1" mesh="lf1"/>
+        <body name="lf2" pos="-4e-05 0.0197 0">
+          <inertial pos="-0.00240445 0.0101095 -0.0323563" quat="0.944556 0.104897 0.0712647 -0.302873" mass="0.004137" diaginertia="2.40073e-06 2.28091e-06 3.34307e-07"/>
+          <joint name="lf1_lf2" range="-3.14 3.14" actuatorfrcrange="-10 10" armature="0.0005" damping="0.01" frictionloss="0.005" axis="0 1 0"/>
+          <geom quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" rgba="0.25098 0.25098 0.25098 1" density="0" mesh="lf2"/>
+          <geom quat="1 0 0 0" type="mesh" rgba="0.25098 0.25098 0.25098 1" mesh="lf2"/>
+          <body name="lf3" pos="0 0.00475 -0.05">
+            <inertial pos="-0.00492923 0.00168886 -0.036234" quat="0.669469 0.0722434 0.102607 0.732164" mass="0.002549" diaginertia="1.82849e-06 1.53762e-06 3.09222e-07"/>
+            <joint name="lf2_lf3" range="-3.14 3.14" actuatorfrcrange="-10 10" armature="0.0005" damping="0.01" frictionloss="0.005" axis="0 1 0"/>
+            <geom type="mesh" contype="0" conaffinity="0" group="1" rgba="0.0980392 0.0980392 0.0980392 1" density="0" mesh="lf3"/>
+            <geom type="mesh" rgba="0.0980392 0.0980392 0.0980392 1" mesh="lf3"/>
+            <site name="foot_lf" size="0.006" pos="-0.0059 0 -0.062" rgba="1 0.3 0.3 1"/>
+            <frame pos="0 0 -0.056">
+              <geom quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" rgba="0.258824 0.258824 0.258824 1" density="0" mesh="lffoot"/>
+              <geom quat="1 0 0 0" type="mesh" rgba="0.258824 0.258824 0.258824 1" mesh="lffoot"/>
+            </frame>
+          </body>
+          <frame pos="0 0.01 -0.05">
+            <geom quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" rgba="1 0.866667 0 1" density="0" mesh="lpf2"/>
+            <geom quat="1 0 0 0" type="mesh" rgba="1 0.866667 0 1" mesh="lpf2"/>
+          </frame>
+        </body>
+        <frame pos="0.01076 0.0307 0.013">
+          <geom quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" rgba="1 0.866667 0 1" density="0" mesh="lpf1"/>
+          <geom quat="1 0 0 0" type="mesh" rgba="1 0.866667 0 1" mesh="lpf1"/>
+        </frame>
+      </body>
+      <body name="rf1" pos="0.05 -0.0235 0">
+        <inertial pos="0.0193272 -0.0064158 0.00691373" quat="0.596268 0.383347 -0.540957 0.45263" mass="0.023343" diaginertia="6.76557e-06 6.25281e-06 4.06095e-06"/>
+        <joint name="base_rf1" range="-3.14 3.14" actuatorfrcrange="-10 10" armature="0.0005" damping="0.01" frictionloss="0.005" axis="1 0 0"/>
+        <geom quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" rgba="0.258824 0.258824 0.258824 1" density="0" mesh="rf1"/>
+        <geom quat="1 0 0 0" type="mesh" rgba="0.258824 0.258824 0.258824 1" mesh="rf1"/>
+        <body name="rf2" pos="-4e-05 -0.0197 0">
+          <inertial pos="-0.00240445 -0.0101095 -0.0323563" quat="0.944568 -0.105017 0.0709566 0.302865" mass="0.004137" diaginertia="2.40029e-06 2.28116e-06 3.34496e-07"/>
+          <joint name="rf1_rf2" range="-3.14 3.14" actuatorfrcrange="-10 10" armature="0.0005" damping="0.01" frictionloss="0.005" axis="0 1 0"/>
+          <geom quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" rgba="0.25098 0.25098 0.25098 1" density="0" mesh="rf2"/>
+          <geom quat="1 0 0 0" type="mesh" rgba="0.25098 0.25098 0.25098 1" mesh="rf2"/>
+          <body name="rf3" pos="0 -0.00475 -0.05">
+            <inertial pos="-0.00492923 -0.00141327 -0.036234" quat="0.736109 0.105538 0.0699795 0.664912" mass="0.002549" diaginertia="1.83061e-06 1.53923e-06 3.09853e-07"/>
+            <joint name="rf2_rf3" range="-3.14 3.14" actuatorfrcrange="-10 10" armature="0.0005" damping="0.01" frictionloss="0.005" axis="0 1 0"/>
+            <geom type="mesh" contype="0" conaffinity="0" group="1" rgba="0.0980392 0.0980392 0.0980392 1" density="0" mesh="rf3"/>
+            <geom type="mesh" rgba="0.0980392 0.0980392 0.0980392 1" mesh="rf3"/>
+            <site name="foot_rf" size="0.006" pos="-0.0059 0 -0.062" rgba="1 0.3 0.3 1"/>
+            <frame pos="0 0 -0.056">
+              <geom quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" rgba="0.258824 0.258824 0.258824 1" density="0" mesh="rffoot"/>
+              <geom quat="1 0 0 0" type="mesh" rgba="0.258824 0.258824 0.258824 1" mesh="rffoot"/>
+            </frame>
+          </body>
+          <frame pos="0 -0.01 -0.05">
+            <geom quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" rgba="1 0.866667 0 1" density="0" mesh="rpf2"/>
+            <geom quat="1 0 0 0" type="mesh" rgba="1 0.866667 0 1" mesh="rpf2"/>
+          </frame>
+        </body>
+        <frame pos="0.01076 -0.0307 0.013">
+          <geom quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" rgba="1 0.866667 0 1" density="0" mesh="rpf1"/>
+          <geom quat="1 0 0 0" type="mesh" rgba="1 0.866667 0 1" mesh="rpf1"/>
+        </frame>
+      </body>
+      <body name="rb1" pos="-0.066 -0.0235 0">
+        <inertial pos="-0.016456 -0.0064158 0.00691373" quat="0.523241 0.679396 0.0453602 0.512428" mass="0.023343" diaginertia="9.22187e-06 9.10323e-06 3.55074e-06"/>
+        <joint name="base_rb1" range="-3.14 3.14" actuatorfrcrange="-10 10" armature="0.0005" damping="0.01" frictionloss="0.005" axis="1 0 0"/>
+        <geom quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" rgba="0.258824 0.258824 0.258824 1" density="0" mesh="rb1"/>
+        <geom quat="1 0 0 0" type="mesh" rgba="0.258824 0.258824 0.258824 1" mesh="rb1"/>
+        <body name="rb2" pos="-4e-05 -0.0197 0">
+          <inertial pos="-0.00240445 -0.0101095 -0.0323563" quat="0.944568 -0.105017 0.0709566 0.302865" mass="0.004137" diaginertia="2.40029e-06 2.28116e-06 3.34496e-07"/>
+          <joint name="rb1_rb2" range="-3.14 3.14" actuatorfrcrange="-10 10" armature="0.0005" damping="0.01" frictionloss="0.005" axis="0 1 0"/>
+          <geom quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" rgba="0.25098 0.25098 0.25098 1" density="0" mesh="rb2"/>
+          <geom quat="1 0 0 0" type="mesh" rgba="0.25098 0.25098 0.25098 1" mesh="rb2"/>
+          <body name="rb3" pos="0 -0.00475 -0.05">
+            <inertial pos="-0.00492923 -0.00141327 -0.036234" quat="0.736334 0.105418 0.0700612 0.664674" mass="0.002549" diaginertia="1.83088e-06 1.53952e-06 3.09875e-07"/>
+            <joint name="rb2_rb3" range="-3.14 3.14" actuatorfrcrange="-10 10" armature="0.0005" damping="0.01" frictionloss="0.005" axis="0 1 0"/>
+            <geom type="mesh" contype="0" conaffinity="0" group="1" rgba="0.0980392 0.0980392 0.0980392 1" density="0" mesh="rb3"/>
+            <geom type="mesh" rgba="0.0980392 0.0980392 0.0980392 1" mesh="rb3"/>
+            <site name="foot_rb" size="0.006" pos="-0.0059 0 -0.062" rgba="1 0.3 0.3 1"/>
+            <frame pos="0 0 -0.056">
+              <geom quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" rgba="0.258824 0.258824 0.258824 1" density="0" mesh="rbfoot"/>
+              <geom quat="1 0 0 0" type="mesh" rgba="0.258824 0.258824 0.258824 1" mesh="rbfoot"/>
+            </frame>
+          </body>
+          <frame pos="0 -0.01 -0.05">
+            <geom quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" rgba="1 0.866667 0 1" density="0" mesh="rpb2"/>
+            <geom quat="1 0 0 0" type="mesh" rgba="1 0.866667 0 1" mesh="rpb2"/>
+          </frame>
+        </body>
+        <frame pos="0.01076 -0.0307 0.013">
+          <geom quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" rgba="1 0.866667 0 1" density="0" mesh="rpb1"/>
+          <geom quat="1 0 0 0" type="mesh" rgba="1 0.866667 0 1" mesh="rpb1"/>
+        </frame>
+      </body>
+      <body name="lb1" pos="-0.066 0.0235 0">
+        <inertial pos="-0.016456 0.0064158 0.00691373" quat="0.512439 0.045347 0.679395 0.523232" mass="0.023343" diaginertia="9.22189e-06 9.10321e-06 3.55074e-06"/>
+        <joint name="base_lb1" range="-3.14 3.14" actuatorfrcrange="-10 10" armature="0.0005" damping="0.01" frictionloss="0.005" axis="1 0 0"/>
+        <geom quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" rgba="0.258824 0.258824 0.258824 1" density="0" mesh="lb1"/>
+        <geom quat="1 0 0 0" type="mesh" rgba="0.258824 0.258824 0.258824 1" mesh="lb1"/>
+        <body name="lb2" pos="-4e-05 0.0197 0">
+          <inertial pos="-0.00240445 0.0101095 -0.0323563" quat="0.944556 0.104897 0.0712647 -0.302873" mass="0.004137" diaginertia="2.40073e-06 2.28091e-06 3.34307e-07"/>
+          <joint name="lb1_lb2" range="-3.14 3.14" actuatorfrcrange="-10 10" armature="0.0005" damping="0.01" frictionloss="0.005" axis="0 1 0"/>
+          <geom quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" rgba="0.25098 0.25098 0.25098 1" density="0" mesh="lb2"/>
+          <geom quat="1 0 0 0" type="mesh" rgba="0.25098 0.25098 0.25098 1" mesh="lb2"/>
+          <body name="lb3" pos="0 0.00475 -0.05">
+            <inertial pos="-0.00492923 0.00168886 -0.036234" quat="0.669469 0.0722434 0.102607 0.732164" mass="0.002549" diaginertia="1.82849e-06 1.53762e-06 3.09222e-07"/>
+            <joint name="lb2_lb3" range="-3.14 3.14" actuatorfrcrange="-10 10" armature="0.0005" damping="0.01" frictionloss="0.005" axis="0 1 0"/>
+            <geom quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" rgba="0.0980392 0.0980392 0.0980392 1" density="0" mesh="lb3"/>
+            <geom quat="1 0 0 0" type="mesh" rgba="0.0980392 0.0980392 0.0980392 1" mesh="lb3"/>
+            <site name="foot_lb" size="0.006" pos="-0.0059 0 -0.062" rgba="1 0.3 0.3 1"/>
+            <frame pos="0 0 -0.056">
+              <geom quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" rgba="0.258824 0.258824 0.258824 1" density="0" mesh="lbfoot"/>
+              <geom quat="1 0 0 0" type="mesh" rgba="0.258824 0.258824 0.258824 1" mesh="lbfoot"/>
+            </frame>
+          </body>
+          <frame pos="0 0.01 -0.05">
+            <geom quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" rgba="1 0.866667 0 1" density="0" mesh="lpb2"/>
+            <geom quat="1 0 0 0" type="mesh" rgba="1 0.866667 0 1" mesh="lpb2"/>
+          </frame>
+        </body>
+        <frame pos="0.01076 0.0307 0.013">
+          <geom quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" rgba="1 0.866667 0 1" density="0" mesh="lpb1"/>
+          <geom quat="1 0 0 0" type="mesh" rgba="1 0.866667 0 1" mesh="lpb1"/>
+        </frame>
+      </body>
+      <frame pos="0.089299 -5e-06 -0.015543">
+        <geom pos="-0.089299 0 0.015543" quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" rgba="1 0.866667 0 1" density="0" mesh="Body_front"/>
+        <geom pos="-0.089299 0 0.015543" quat="1 0 0 0" type="mesh" rgba="1 0.866667 0 1" mesh="Body_front"/>
+        <frame pos="0.02 0 0.02">
+          <geom size="0.01 0.01 0.01" type="box" contype="0" conaffinity="0" group="1" density="0"/>
+        </frame>
+      </frame>
+      <frame pos="-0.087701 -0.023505 0.026457">
+        <geom pos="0.087701 0.023505 -0.026457" quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" rgba="0.25098 0.25098 0.25098 1" density="0" mesh="Board_PCB"/>
+        <geom pos="0.087701 0.023505 -0.026457" quat="1 0 0 0" type="mesh" rgba="0.25098 0.25098 0.25098 1" mesh="Board_PCB"/>
+        <frame pos="0.149035 0.023472 0">
+          <geom pos="-0.061334 3.3e-05 -0.026457" quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" rgba="0.976471 0.623529 0 1" density="0" mesh="Board_connectors_1"/>
+          <geom pos="-0.061334 3.3e-05 -0.026457" quat="1 0 0 0" type="mesh" rgba="0.976471 0.623529 0 1" mesh="Board_connectors_1"/>
+        </frame>
+        <frame pos="0.042355 0.0235 0">
+          <geom pos="0.045346 5e-06 -0.026457" quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" rgba="1 1 1 1" density="0" mesh="Board_connectors_2"/>
+          <geom pos="0.045346 5e-06 -0.026457" quat="1 0 0 0" type="mesh" rgba="1 1 1 1" mesh="Board_connectors_2"/>
+        </frame>
+        <frame pos="0.009 0.024 0.042" quat="0.707388 0 0 0.706825">
+          <geom quat="0.707388 0 0 -0.706825" type="mesh" contype="0" conaffinity="0" group="1" rgba="0.2 0.2 0.2 1" density="0" mesh="lidar"/>
+          <geom quat="0.707388 0 0 -0.706825" type="mesh" rgba="0.2 0.2 0.2 1" mesh="lidar"/>
+        </frame>
+      </frame>
+      <frame pos="-0.002701 -0.030005 -0.016293">
+        <geom pos="0.002701 0.030005 0.016293" quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" rgba="1 0.866667 0 1" density="0" mesh="Shell_Side"/>
+        <geom pos="0.002701 0.030005 0.016293" quat="1 0 0 0" type="mesh" rgba="1 0.866667 0 1" mesh="Shell_Side"/>
+      </frame>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <general name="base_lf1" joint="base_lf1" forcelimited="true" forcerange="-0.35 0.35" input="pos" biastype="affine" gainprm="4" biasprm="0 -4 -0.08"/>
+    <general name="lf1_lf2" joint="lf1_lf2" forcelimited="true" forcerange="-0.35 0.35" input="pos" biastype="affine" gainprm="4" biasprm="0 -4 -0.08"/>
+    <general name="lf2_lf3" joint="lf2_lf3" forcelimited="true" forcerange="-0.35 0.35" input="pos" biastype="affine" gainprm="4" biasprm="0 -4 -0.08"/>
+    <general name="base_rf1" joint="base_rf1" forcelimited="true" forcerange="-0.35 0.35" input="pos" biastype="affine" gainprm="4" biasprm="0 -4 -0.08"/>
+    <general name="rf1_rf2" joint="rf1_rf2" forcelimited="true" forcerange="-0.35 0.35" input="pos" biastype="affine" gainprm="4" biasprm="0 -4 -0.08"/>
+    <general name="rf2_rf3" joint="rf2_rf3" forcelimited="true" forcerange="-0.35 0.35" input="pos" biastype="affine" gainprm="4" biasprm="0 -4 -0.08"/>
+    <general name="base_rb1" joint="base_rb1" forcelimited="true" forcerange="-0.35 0.35" input="pos" biastype="affine" gainprm="4" biasprm="0 -4 -0.08"/>
+    <general name="rb1_rb2" joint="rb1_rb2" forcelimited="true" forcerange="-0.35 0.35" input="pos" biastype="affine" gainprm="4" biasprm="0 -4 -0.08"/>
+    <general name="rb2_rb3" joint="rb2_rb3" forcelimited="true" forcerange="-0.35 0.35" input="pos" biastype="affine" gainprm="4" biasprm="0 -4 -0.08"/>
+    <general name="base_lb1" joint="base_lb1" forcelimited="true" forcerange="-0.35 0.35" input="pos" biastype="affine" gainprm="4" biasprm="0 -4 -0.08"/>
+    <general name="lb1_lb2" joint="lb1_lb2" forcelimited="true" forcerange="-0.35 0.35" input="pos" biastype="affine" gainprm="4" biasprm="0 -4 -0.08"/>
+    <general name="lb2_lb3" joint="lb2_lb3" forcelimited="true" forcerange="-0.35 0.35" input="pos" biastype="affine" gainprm="4" biasprm="0 -4 -0.08"/>
+  </actuator>
+
+  <keyframe>
+    <key name="home" qpos="0 0 0.12 1 0 0 0 0 0.994 -1.767 0 0.994 -1.767 0 0.994 -1.767 0 0.994 -1.767" ctrl="0 0.994 -1.767 0 0.994 -1.767 0 0.994 -1.767 0 0.994 -1.767"/>
+  </keyframe>
+</mujoco>

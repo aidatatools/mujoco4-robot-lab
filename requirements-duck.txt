@@ -1,0 +1,32 @@
+# Open Duck environment (.venv-duck): walking demo (duck_walk.py) + training (duck_train.py)
+# Tested on Ubuntu 24.04, Python 3.12, RTX 5090 Laptop (driver 580).
+#
+# Versions are pinned on purpose:
+# - playground>=1.0 was rewritten for PyTorch + MuJoCo Warp; Open Duck needs the JAX version (0.0.5).
+# - brax 0.14.2 still calls APIs that JAX 0.10 removed; scripts/jax_compat.py patches them back in.
+# - jax[cuda12] runs on NVIDIA GPUs; without a GPU it falls back to CPU (training will be very slow).
+
+# Simulation
+mujoco==4.0.1
+mujoco-mjx==4.0.1
+playground==0.0.5
+
+# JAX + RL
+jax[cuda12]==0.12.1
+flax==0.12.12
+brax==0.14.2
+
+# Policy export (ONNX) and inference
+tensorflow==2.21.0
+tf2onnx==1.17.0
+onnxruntime==1.32.0
+
+# Logging, joystick and plotting, used by Open_Duck_Playground
+tensorboardX==2.6.5
+tensorboard==2.21.0
+pygame==2.6.1
+matplotlib==3.11.2
+
+# Used by scripts/duck_walk.py
+etils==1.15.0
+imageio[ffmpeg]==2.38.2
