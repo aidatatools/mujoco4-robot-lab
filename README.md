@@ -41,7 +41,7 @@ source .venv/bin/activate
 1. 建兩個 Python 3.12 虛擬環境：
    - `.venv`：`mujoco==4.0.1`，給第 2～4 節和 Mini Pupper 用
    - `.venv-duck`：Open Duck 專用（JAX + 舊版 Playground），套件版本鎖在 `requirements-duck.txt`，見第 5 節
-2. clone `Open_Duck_Playground`、`Open_Duck_Mini`（v2 分支，預訓練策略）和 `mini_pupper_ros`（ros2-jazzy 分支）
+2. clone `Open_Duck_Playground`、`Open_Duck_Mini`（v2 分支，預訓練策略）和 `mini_pupper_ros`（ros2-jazzy 分支），並切到 `third_party/versions.lock` 固定的 commit，確保每個人拿到相同的上游版本。要升級上游：改 lock 檔的 commit → 重跑 `setup.sh` → 自我檢查通過再提交
 3. 修正 Open Duck 粗糙地形場景的 hfield 路徑（另存成 `*_mj4.xml`）
 4. 把 Mini Pupper 2 的 xacro 展開成 URDF（**不需要裝 ROS**）
 5. URDF → MJCF 場景

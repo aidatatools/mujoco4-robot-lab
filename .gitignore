@@ -4,3 +4,7 @@ __pycache__/
 *$py.class
 
 .venv*/
+
+# 上游原始碼由 setup.sh 下載，只追蹤版本鎖定檔
+third_party/*
+!third_party/versions.lock

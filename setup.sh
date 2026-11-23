@@ -17,13 +17,26 @@ export PATH="$HOME/.local/bin:$PATH"
 uv venv -p 3.12 .venv
 uv pip install -p .venv/bin/python "mujoco==4.0.1" "imageio[ffmpeg]" xacro
 
-# 2) 取得兩台機器人的模型
-mkdir -p third_party && cd third_party
-[[ -d Open_Duck_Playground ]] || git clone --depth 1 https://github.com/apirrone/Open_Duck_Playground.git
-[[ -d mini_pupper_ros ]] || git clone --depth 1 -b ros2-jazzy https://github.com/mangdangroboticsclub/mini_pupper_ros.git
-# 官方預訓練走路策略 BEST_WALK_ONNX_2.onnx 在這個 repo（v2 分支）
-[[ -d Open_Duck_Mini ]] || git clone --depth 1 -b v2 https://github.com/apirrone/Open_Duck_Mini.git
-cd "$ROOT"
+# 2) 取得兩台機器人的模型：版本固定在 third_party/versions.lock，確保每次環境一致
+#    官方預訓練走路策略 BEST_WALK_ONNX_2.onnx 在 Open_Duck_Mini（v2 分支）
+mkdir -p third_party
+while read -r name url branch commit; do
+  [[ -z "$name" || "$name" == \#* ]] && continue
+  dir="third_party/$name"
+  if [[ ! -d "$dir/.git" ]]; then
+    git init -q "$dir"
+    git -C "$dir" remote add origin "$url"
+  fi
+  if [[ "$(git -C "$dir" rev-parse HEAD 2>/dev/null)" != "$commit" ]]; then
+    if [[ -n "$(git -C "$dir" status --porcelain --untracked-files=no 2>/dev/null)" ]]; then
+      echo "❌ $dir 有未提交的修改，無法切換到鎖定版本 $commit（請先處理或刪除該目錄）" >&2
+      exit 1
+    fi
+    echo "→ $name ($branch) @ ${commit:0:12}"
+    git -C "$dir" fetch -q --depth 1 origin "$commit"
+    git -C "$dir" -c advice.detachedHead=false checkout -q "$commit"
+  fi
+done < third_party/versions.lock
 
 # 2b) Open Duck 專用環境：程式依賴舊版 JAX Playground，必須鎖 playground<1.0
 #     版本全部鎖在 requirements-duck.txt（含 GPU 版 JAX、訓練要用的 TensorFlow / tf2onnx）

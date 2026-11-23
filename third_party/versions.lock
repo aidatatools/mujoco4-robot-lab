@@ -1,0 +1,6 @@
+# 上游原始碼的固定版本。setup.sh 會依此檔 clone 並 checkout 到指定 commit。
+# 要升級：改 commit 欄位 → 重新跑 setup.sh → 確認自我檢查通過再 commit 此檔。
+# 格式：<目錄名稱> <repo URL> <分支（僅供紀錄）> <commit SHA>
+Open_Duck_Playground https://github.com/apirrone/Open_Duck_Playground.git           main        b9be205ac64488c23504ca42e5ec790337adeec3
+mini_pupper_ros      https://github.com/mangdangroboticsclub/mini_pupper_ros.git   ros2-jazzy  c4f5feb511e965875dfb381cce846854a9e22cf2
+Open_Duck_Mini       https://github.com/apirrone/Open_Duck_Mini.git                 v2          b23317a485b3cec7d8417f352478778b3475173c
