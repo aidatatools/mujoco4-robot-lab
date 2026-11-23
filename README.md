@@ -69,6 +69,12 @@ mujoco-studio $PUPPER
 mujoco-studio $PUPPER --hot_reload=model     # 改 XML 存檔就自動重載，教學很好用
 ```
 
+> 💡 畫面卡頓、黑屏或顯示異常時，可以先在面板關掉 **Shadow**、**Reflection**、**Post-processing** 看看；還是不行就改用軟體渲染：
+>
+> ```bash
+> mujoco-studio $PUPPER --gfx opengl_software
+> ```
+
 **(c) Studio 網頁檢視器**（學員用瀏覽器看，不用裝任何東西）
 
 ```bash

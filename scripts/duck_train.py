@@ -30,6 +30,15 @@ DUCK_REPO = ROOT / "third_party" / "Open_Duck_Playground"
 sys.path.insert(0, str(DUCK_REPO))
 import jax_compat  # noqa: E402,F401  (scripts/ is on sys.path as the script's folder)
 
+# TensorFlow is only used for the small ONNX export inside the training loop.
+# Keep it on the CPU: JAX already preallocated most of the GPU memory, so TF
+# cannot create a cuBLAS handle ("No blas support for stream"), and TF has no
+# prebuilt kernels for newer GPUs such as compute capability 12.0 anyway.
+# This must run before TF touches the GPU.
+import tensorflow as tf  # noqa: E402
+
+tf.config.set_visible_devices([], "GPU")
+
 os.chdir(DUCK_REPO)
 sys.argv[0] = "playground/open_duck_mini_v2/runner.py"
 runpy.run_module("playground.open_duck_mini_v2.runner", run_name="__main__", alter_sys=True)

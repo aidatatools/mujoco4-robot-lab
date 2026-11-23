@@ -8,6 +8,7 @@
 """
 
 import argparse
+import threading
 import time
 
 import mujoco
@@ -58,7 +59,10 @@ def main():
   viewer = None
   if args.viewer:
     from mujoco import viewer as mj_viewer  # 需要 mujoco 或 mujoco-core[rendering]
+    before = set(threading.enumerate())
     viewer = mj_viewer.launch_passive(m, d)
+    # launch_passive 會開一條 daemon 執行緒跑 GLFW 視窗；記下來，結束前要等它收尾
+    viewer_threads = [t for t in threading.enumerate() if t not in before]
 
   max_tilt, n = 0.0, int(args.seconds / m.opt.timestep)
   for i in range(n):
@@ -88,7 +92,16 @@ def main():
     iio.imwrite(args.video, np.stack(frames), fps=fps, codec="libx264")
     print(f"  影片：{args.video}（{len(frames)} 格）")
   if viewer:
+    if viewer.is_running():
+      print("測試完成，關閉視窗即可結束")
+      while viewer.is_running():
+        viewer.sync()
+        time.sleep(1 / 60)
     viewer.close()
+    # 一定要等 viewer 執行緒自己 destroy 完，否則主執行緒在 atexit 呼叫 glfw.terminate()
+    # 會和它同時釋放 GLFW/OpenGL 資源 → munmap_chunk(): invalid pointer / core dumped
+    for t in viewer_threads:
+      t.join(timeout=5)
 
 
 if __name__ == "__main__":
